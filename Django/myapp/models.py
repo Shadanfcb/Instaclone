@@ -39,6 +39,10 @@ class Post(models.Model):
     def like_count(self):
         return len(Like.objects.filter(post_id=self.id))
 
+    @property
+    def comments(self):
+        return CommentModel.objects.filter(post=self).order_by('-created_on')
+
 
 class Like(models.Model):
     user = models.ForeignKey(UserModel)
@@ -53,3 +57,7 @@ class CommentModel(models.Model):
   comment_text = models.CharField(max_length=555)
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
+
+
+class CategoryModel(models.Model):
+    category = models.CharField(max_length=5)

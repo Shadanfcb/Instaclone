@@ -1,5 +1,12 @@
 from django import forms
-from models import UserModel, Post, Like, CommentModel
+from models import UserModel, Post, Like, CommentModel, CategoryModel
+
+CATEGORY = (
+    ('LAP', 'laptop'),
+    ('CAR', 'cars'),
+    ('MOB', 'Mobile'),
+    ('BIKE', 'Bike'),
+)
 
 
 class SignUpForm(forms.ModelForm):
@@ -30,3 +37,10 @@ class CommentForm(forms.ModelForm):
   class Meta:
     model = CommentModel
     fields = ['comment_text', 'post']
+
+
+class CategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = CategoryModel
+        fields=['category']
