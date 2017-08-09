@@ -1,46 +1,31 @@
 from django import forms
-from models import UserModel, Post, Like, CommentModel, CategoryModel
-
-CATEGORY = (
-    ('LAP', 'laptop'),
-    ('CAR', 'cars'),
-    ('MOB', 'Mobile'),
-    ('BIKE', 'Bike'),
-)
+from models import User,PostModel,CommentModel,LikeModel
 
 
 class SignUpForm(forms.ModelForm):
     class Meta:
-        model = UserModel
-        fields = ['username', 'name', 'email', 'password']
-
+        model = User
+        fields=['email','username','name','password']
 
 class LoginForm(forms.ModelForm):
     class Meta:
-        model = UserModel
+        model = User
         fields = ['username', 'password']
-
 
 class PostForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields = ['image', 'caption']
-
+        model = PostModel
+        fields=['image', 'caption']
 
 class LikeForm(forms.ModelForm):
+
     class Meta:
-        model = Like
-        fields = ['post']
+        model = LikeModel
+        fields=['post']
 
 
 class CommentForm(forms.ModelForm):
-  class Meta:
-    model = CommentModel
-    fields = ['comment_text', 'post']
-
-
-class CategoryForm(forms.ModelForm):
 
     class Meta:
-        model = CategoryModel
-        fields=['category']
+        model = CommentModel
+        fields = ['comment_text', 'post']

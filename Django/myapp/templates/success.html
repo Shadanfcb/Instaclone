@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign up</title>
+    <title>Signup successful</title>
 </head>
+<style>
+   body {
+       background: yellow;
+   }
+   input[type="submit"] {
+        background: red;
+        color: white;
+        border-radius: 20%;
+    }
+</style>
 <body>
-Signup successfull {{name}}
+<h1>Successfully signed up! Please continue to login!</h1>
+    <form action="/login/" method="get">
+        <input type="submit" class="btn btn-default" value="Login">
+    </form>
 </body>
 </html>
