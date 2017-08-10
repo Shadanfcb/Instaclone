@@ -1,0 +1,27 @@
+<style>
+         body{
+            background-image: url(" http://images.all-free-download.com/images/graphiclarge/blurred_golden_background_192849.jpg ");
+        }
+    </style>
+    <h1><b>( <a href="../../">NEW USER ?</a> )</b></h1>
+ <center>
+     <form method="post">
+    {% csrf_token %}
+      <div>
+          <h2> InstaClone Login </h2>
+          <img src="http://is2.mzstatic.com/image/thumb/Purple128/v4/cd/11/b8/cd11b84d-3eab-dce4-db60-33e31a981fd1/source/1200x630bb.jpg" alt="some_text" style="width:25%;height:50%;">
+          <br>
+          <h2><label for="username">Username: </label></h2>
+          <input id="username" type="text" name="username" value={{ username }}>
+      </div>
+
+      <div>
+          <h3><label for="password">Password: </label></h3>
+          <input id="password" type="password" name="password" value={{ password }}>
+      </div>
+
+      <input type="submit" value="Log In">
+
+    </form>
+
+</center>

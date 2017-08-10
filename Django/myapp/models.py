@@ -1,18 +1,22 @@
-from __future__ import unicode_literals
+from django.db import models
 
-from django\
-    .db import models
 import uuid
-class User(models.Model):
-    username = models.CharField(max_length=120,default='')
-    name = models.CharField(max_length=120,default='')
-    email = models.EmailField(default='')
-    password = models.CharField(max_length=40,default='')
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+
+# Create your models here.
+
+
+
+class UserModel(models.Model):
+	email = models.EmailField()
+	name = models.CharField(max_length=120)
+	username = models.CharField(max_length=120)
+	password = models.CharField(max_length=40)
+	created_on = models.DateTimeField(auto_now_add=True)
+	updated_on = models.DateTimeField(auto_now=True)
+
 
 class SessionToken(models.Model):
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(UserModel)
 	session_token = models.CharField(max_length=255)
 	last_request_on = models.DateTimeField(auto_now=True)
 	created_on = models.DateTimeField(auto_now_add=True)
@@ -22,14 +26,16 @@ class SessionToken(models.Model):
 		self.session_token = uuid.uuid4()
 
 class PostModel(models.Model):
-	user = models.ForeignKey(User)
-	image = models.FileField(upload_to='user_images')
+	user = models.ForeignKey(UserModel)
+	image = models.FileField(upload_to='instacloneuser_images')
 	image_url = models.CharField(max_length=255)
+	price = models.IntegerField(default=0)
 	caption = models.CharField(max_length=240)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
-	is_dirty = models.BooleanField(default=False)
 	has_liked = False
+	category = models.CharField(max_length=255)
+
 
 	@property
 	def like_count(self):
@@ -39,17 +45,19 @@ class PostModel(models.Model):
 	def comments(self):
 		return CommentModel.objects.filter(post=self).order_by('-created_on')
 
-
 class LikeModel(models.Model):
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(UserModel)
 	post = models.ForeignKey(PostModel)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
 
 
 class CommentModel(models.Model):
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(UserModel)
 	post = models.ForeignKey(PostModel)
-	comment_text = models.CharField(max_length=555)
+	comment_text = models.IntegerField(default=0)
 	created_on = models.DateTimeField(auto_now_add=True)
-	updated_on =models.DateTimeField(auto_now=True)
+	updated_on = models.DateTimeField(auto_now=True)
+
+class CategoryModel(models.Model):
+	category = models.CharField(max_length=5)

@@ -1,87 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>DashBoard</title>
-
     <style>
-        body{
-            text-align: center;
-             background: magenta;
-             font-size: medium;
-        }
-       input [type= "submit"] {
-            color: green;
-            border: 0px;
-            font-size: smaller;
-            border-radius: 15%;
-            font-size: 18px;
-            padding: 5px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-right: 16px;
-        }
-       h1 {
-            color: lightgrey;
-            font-size: 55px;
-        }
-        h3 {
-            color: red;
-            font-size: 35px;
+         body {
+      background: url("http://images.all-free-download.com/images/graphiclarge/blurred_golden_background_192849.jpg");
+         {background-size: cover;}
+      background-position: center;
+      color: black;
+      font-family: times new roman;
     }
-        p {
-            font-size: 22px;
-             color: brown;
-        }
-        input[type="text"] {
-            font-size: smaller;
-            width: 150px;
-            height: 15px;
-            background: lightblue;
-            border: 0px;
-            padding: 10px 10px 10px 10px;
-            margin-bottom: 10px;
-    }
-        img{
-            height: 300px;
-        }
-        span{
-            text-align: center;
-        }
-        div{
-            font-size: 15px;
-        }
-        p{
-            font-size: 15px;
-        }
-    </style>
-
+    <meta charset="UTF-8">
+    <title>Title</title>
+         </style>
 </head>
-<body>
-
-<button onclick= "location.href = 'post/'" type="button">Create Post</button>
-
-<form method="POST" action="/logout/">
-            {% csrf_token %}
-    <input type="submit" class="btn btn-default" value="Logout">
-</form>
-<h1>Feeds</h1>
-{% for post in posts %}
-
-
-        <h3> Posted by: {{ post.user.username }}</h3>
-        <br>
+<u>
+<h4><b>( <a href="../../login/">LOGOUT ?</a> )</b></h4>
+ <div>
+      <form method="POST" action="/feed/">
+                {% csrf_token %}
+                <input type="submit" class="btn-default btn" value="C H A N G E   C A T E G O R Y">
+      </form>
+ </div>
+<center>
+    <form method="post" action="/post/">
+        {% csrf_token %}
+        <input type="submit" class="btn-default btn" value="Create Post">
+    </form>
+    {% for post in posts %}
+        <h2>C A T E G O R Y ({{ post.category }})</h2>
+        <h3> Posted by: {{ post.user.username }} </h3>
         <p>[{{ post.created_on }}]</p>
-
-
-
-        <img style="display:inline-block; width:350px; height:300px;"
+        <img style="display:inline-block; width:400px; height:350px;"
              src="{{ post.image_url }}" /><br>
         <span  style="display:inline-block;">{{ post.caption }}</span><br/><br/>
         <div style="display:inline-block">
-            {{ post.like_count }} like this
+            {{ post.like_count }} likes
         </div>
-        <div style="display:inline-block">
+         <div style="display:inline-block">
             <form method="POST" action="/like/">
               {% csrf_token %}
               <input type="hidden" name="post" value="{{ post.id }}" />
@@ -91,24 +46,26 @@
                 <input type="submit" class="btn btn-default" value="Like">
                 {% endif %}
             </form>
-        </div>
-
+        </div><br>
+        <span  style="display:inline-block;"><h3>Price : {{ post.price }}</h3></span><br/>
         <div>
             <form method="POST" action="/comment/">
                 {% csrf_token %}
                 <input type="hidden" name="post" value="{{ post.id }}" />
-                <input type="text" name="comment_text" id="comment_text" placeholder="Make a comment.." value="{{ comment_text }}">
+                <input type="text" name="comment_text" id="comment_text" placeholder="Place your bid.." value="{{ comment_text }}">
                 {{ comment_text }}
-                <input type="submit" class="btn-default btn" value="Comment">
+                <input type="submit" class="btn-default btn" value="Send">
             </form>
         </div>
-
+        {{ currentuser }}
         <div>
+            {{ currentuser }}
             {% for comment in post.comments %}
-                <p><b>{{ comment.user.username }} [{{ comment.created_on }}]:</b> {{ comment.comment_text }}</p>
+                <p><b>{{ comment.user.username }} [{{ comment.created_on }}] / Email : {{ comment.user.email }}:</b>{{ comment.comment_text }}</p>
             {% endfor %}
-        </div>
-
-        {% endfor %}
+        </div><br>
+        <hr>
+    {% endfor %}
+</center>
 </body>
 </html>

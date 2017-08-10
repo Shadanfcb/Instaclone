@@ -1,123 +1,46 @@
-{% load static %}
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
+    <style>
+         body {
+      text-align: center;
+      background: url("http://images.all-free-download.com/images/graphiclarge/blurred_golden_background_192849.jpg");
+      background-size: cover;
+      background-position: center;
+      color: black;
+      font-family: times new roman;
+    }
     <meta charset="UTF-8">
     <title>Instagram Clone</title>
-    <style>
-       body{
-
-       }
-         h1 {
-             color: orange;
-             font-size: 55px;
-         }
-        h3 {
-            color: black;
-            font-size: 35px;
-        }
-        div{
-            font-family: Verdana;
-            color: grey;
-            margin: 10px;
-        }
-        .main
-        {
-            text-align:center;
-            font-size: 22px;
-        }
-        form{
-            font-size: 16px;
-        }
-        label{
-display:inline-block;
-width:200px;
-text-align:right;
-            margin-left: -120px;
-}
-        button{
-             background: red;
-            color: white;
-            border: 0px;
-            font-size: smaller;
-            border-radius: 15%;
-            font-size: 18px;
-            padding: 5px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-right: 16px;
-        }
-         input[type="submit"] {
-            background: brown;
-            color: white;
-            border: 0px;
-            font-size: smaller;
-            border-radius: 15%;
-            font-size: 18px;
-            padding: 5px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-right: 16px;
-        }
-         table{
-            border: solid;
-            border-color: darkslategrey;
-            padding: 10px 10px 10px 10px;
-        }
     </style>
 </head>
 <body>
 	<div class="main">
             <h1> Instagram Clone</h1>
-        <h2><u>Sign Up</u></h2>
+            <h3>Sign Up</h3>
     </div>
-
-    <div>
-
-        <form action = '' method="post">{% csrf_token %}
-            <table align="center">
-            <tr>
-
-            <div class ="username">
-                <td><label for="username">Username: </label></td>
-                <td> <input id="username" type="text" name="username" value={{ username }}></td>
+    <div style="text-align: center;">
+        <form method="post">
+          {% csrf_token %}
+            <div>
+                <label for="username">Username: </label>
+                <input id="username" type="text" name="username" value={{ username }}>
             </div>
-            </tr>
-
-            <tr>
-            <div class="name">
-                <td><label for="name">Name: </label></td>
-                <td><input id="name" type="text" name="name" value={{ name }}></td>
+            <div>
+                <label for="name">Name   :                    .              .         .</label>
+                <input id="name" type="text" name="name" value={{ name }}>
             </div>
-            </tr>
-
-           <tr>
-            <div class="email">
-                <td><label for="email">Email: </label></td>
-                <td> <input id="email" type="text" name="email" value={{ email }}></td>
+            <div>
+                <label for="email">Email  :              .                .               .</label>
+                <input id="email" type="text" name="email" value={{ email }}>
             </div>
-            </tr>
-
-            <tr>
-            <div class="password">
-                <td><label for="password">Password: </label></td>
-                <td><input id="password" type="password" name="password" value={{ password }}></td>
-            </div>
-            </tr>
-            </table>
-            <br/>
-
-                <input type="submit" value="Sign Up"/>
-                <input type="submit" value="reset"/>
-               <br>
+            <div>
+                <label for="password">Password : </label>
+                <input id="password" type="password" name="password" value={{ password }}>
+            </div><br>
+                <input type="submit" value="Sign Up">
         </form>
-
-    </div><br><br>
-
-    <div><h3>Already a user?</h3><button onclick= "location.href = 'login/'" type="button">Login</button>
-
-        </div>
+    </div><br><br><br>
+    <div><h3>Already a user?</h3><h1><b><a href="login/">Login</a> </b></h1></div>
 </body>
 </html>
